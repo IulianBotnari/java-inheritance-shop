@@ -14,6 +14,13 @@ public class App {
         Tvnumero1.setTvHeigth(100.32f);
         Tvnumero1.setTvWidth(200.56f);
         System.out.println(Tvnumero1.getTvInfo());
+        System.out.println();
+
+
+        Headphones cuffie1 = new Headphones(700, "Beats", "Apple",BigDecimal.valueOf(200), (byte)22, "Blu", true);
+        System.out.println(cuffie1.getHeadPhoneInfo());
+    
+    
     }
 
     
