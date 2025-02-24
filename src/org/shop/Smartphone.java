@@ -25,17 +25,15 @@ public class Smartphone extends Product {
         return  this.memorySize;
     }
 
-
-    public String getSmartphoneInfo(){
+    @Override
+    public String toString(){
         return 
-        "Info Smartphone: " +
-        "\nCodice: " + this.getProductCode() +
-        "\nNome prodotto: " + this.name +
-        "\nBrand prodotto: " + this.brand + 
+
+        super.toString() +
+
         "\nIMEI: " + this.IMEI + 
-        "\nMemoria: " + this.memorySize +
-        "\nPrezzo: " + this.price + 
-        "\nIva: " + this.iva;
+        "\nMemoria: " + this.memorySize;
+      
     }
 
     

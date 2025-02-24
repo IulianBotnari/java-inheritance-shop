@@ -17,16 +17,13 @@ public class Headphones extends Product {
     }
 
         // get tv methods
-        public String getHeadPhoneInfo(){
+        @Override
+        public String toString(){
             return 
-            "Info Cuffie: " +
-            "\nCodice: " + this.getProductCode() +
-            "\nNome prodotto: " + this.name +
-            "\nBrand prodotto: " + this.brand + 
+            super.toString() +
             "\nWireless: " + this.wireless +
-            "\nColor: " + this.color +
-            "\nPrezzo: " + this.price + 
-            "\nIva: " + this.iva;
+            "\nColor: " + this.color;
+
         }
     
         public String getHeadphonesColor(){

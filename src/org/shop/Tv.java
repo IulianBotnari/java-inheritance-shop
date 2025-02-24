@@ -20,17 +20,15 @@ public class Tv extends Product{
         this.smart = smart;
     }
     // get tv methods
-    public String getTvInfo(){
+    @Override
+    public String toString(){
         return 
-        "Info TV: " +
-        "\nCodice: " + this.getProductCode() +
-        "\nNome prodotto: " + this.name +
-        "\nBrand prodotto: " + this.brand + 
+
+        super.toString() +
         "\nLarghezza: " + formattaNumeriDecimali.format(this.width) + 
-        "\nAltezza: " + formattaNumeriDecimali.format(this.heigth) +
-        "\nSmart: " + this.smart +
-        "\nPrezzo: " + this.price + 
-        "\nIva: " + this.iva;
+        "\nAltezza: " + formattaNumeriDecimali.format(this.heigth) + 
+        "\nSmart: " + this.smart;
+
     }
 
     public float getTvWidth(){

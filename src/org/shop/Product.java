@@ -48,6 +48,18 @@ public class Product {
 
     // get methods
 
+    
+    public String toString(){
+        return 
+        "Info: " +
+        "\nCodice: " + this.getProductCode() +
+        "\nNome prodotto: " + this.name +
+        "\nBrand prodotto: " + this.brand + 
+        "\nPrezzo: " + this.price + 
+        "\nIva: " + this.iva;
+    }
+
+
     public int getProductCode() {
         return this.code;
     }
