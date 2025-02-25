@@ -1,6 +1,7 @@
 package org.shop;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class Tv extends Product{
@@ -12,8 +13,8 @@ public class Tv extends Product{
     protected boolean smart;
 
 
-    public Tv(int code, String name, String brand, BigDecimal price, byte iva, float width, float heigth, boolean smart){
-        super(code, name, brand, price, iva);
+    public Tv(int code, String name, String brand, BigDecimal price, byte iva, boolean isFidelity, float width, float heigth, boolean smart){
+        super(code, name, brand, price, iva, isFidelity);
 
         this.width = width;
         this.heigth = heigth;
@@ -42,6 +43,21 @@ public class Tv extends Product{
     public boolean getTvSmart(){
         return this.smart;
     }
+
+    @Override
+    public BigDecimal totalPrice(){
+        BigDecimal ivaPrice = this.price.multiply(BigDecimal.valueOf(this.iva)).divide(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP);
+
+        if (!smart) {
+            return this.price.add(ivaPrice).subtract(this.price.add(ivaPrice).multiply(BigDecimal.valueOf(0.1f))).setScale(2, RoundingMode.HALF_UP);
+        } else{
+
+            return super.totalPrice().setScale(2, RoundingMode.HALF_UP);
+        }
+     
+
+
+    };
 
 
     // set tv methods

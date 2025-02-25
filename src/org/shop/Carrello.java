@@ -1,6 +1,7 @@
 package org.shop;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class Carrello {
@@ -36,6 +37,10 @@ public class Carrello {
             String productType = input.nextLine().toLowerCase();
             System.out.println(productType);
 
+            System.out.println("Hai la tessera fedeltà ? (true o false)");
+            boolean isFidelity = input.nextBoolean();
+            input.nextLine();
+
             switch (productType) {
                 case "cuffie":
                     System.out.println("Inserisci colore delle cuffie: ");
@@ -44,7 +49,7 @@ public class Carrello {
                     System.out.println("Inserisci true o false se le cuffie sono wireless: ");
                     Boolean wireless = input.nextBoolean();
 
-                    Headphones cuffie = new Headphones(productCode, productName, productBrand, productPrice, (byte) productIva, color, wireless);
+                    Headphones cuffie = new Headphones(productCode, productName, productBrand, productPrice, (byte) productIva, isFidelity, color, wireless);
 
                     products[i] = cuffie;
 
@@ -63,7 +68,7 @@ public class Carrello {
                     System.out.println("Inserisci true o false se la tv smart: ");
                     Boolean smart = input.nextBoolean();
 
-                    Tv tv = new Tv(productCode, productName, productBrand, productPrice, (byte) productIva, width, heigth, smart);
+                    Tv tv = new Tv(productCode, productName, productBrand, productPrice, (byte) productIva, isFidelity, width, heigth, smart);
 
                     products[i] = tv;
 
@@ -76,10 +81,11 @@ public class Carrello {
                     
 
                     System.out.println("Inserisci quantita di memoria: ");
-                    String memorySize = input.nextLine();
+                    int memorySize = input.nextInt();
+                    input.nextLine();
 
                     
-                    Smartphone Smartphone = new Smartphone(productCode, productName, productBrand, productPrice, (byte) productIva, IMEI, memorySize);
+                    Smartphone Smartphone = new Smartphone(productCode, productName, productBrand, productPrice, (byte) productIva, isFidelity, IMEI, memorySize);
 
                     products[i] = Smartphone;
                     
@@ -100,10 +106,17 @@ public class Carrello {
 
         System.out.println("--------Carrello---------");
 
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
         for(Product product : products){
             System.out.println(product.toString());
+            totalPrice = totalPrice.add(product.totalPrice());
+            System.out.println("----------------");
+            System.out.println("Totale " + product.name + ":" + product.totalPrice());
             System.out.println("----------------");
         }
+
+        System.out.println("Prezzo totale prodotti nel carrello: " + totalPrice.setScale(2, RoundingMode.HALF_UP));
       
     }
 }

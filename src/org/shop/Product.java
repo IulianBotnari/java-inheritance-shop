@@ -1,6 +1,7 @@
 package org.shop;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Product {
 
@@ -9,13 +10,15 @@ public class Product {
     protected String brand;
     protected BigDecimal price;
     protected byte iva;
+    protected boolean isFidelity;
 
-    public Product(int code, String name, String brand, BigDecimal price, byte iva) {
+    public Product(int code, String name, String brand, BigDecimal price, byte iva, boolean isFidelity) {
         this.code = code;
         this.name = name;
         this.brand = brand;
         this.price = price;
         this.iva = iva;
+        this.isFidelity = isFidelity;
 
     }
 
@@ -80,4 +83,16 @@ public class Product {
         return this.iva;
     }
 
+    public BigDecimal totalPrice(){
+        BigDecimal ivaPrice = this.price.multiply(BigDecimal.valueOf(this.iva)).divide(BigDecimal.valueOf(100)).setScale(2, RoundingMode.HALF_UP);
+        if (isFidelity) {
+            return this.price.add(ivaPrice).subtract(this.price.add(ivaPrice).multiply(BigDecimal.valueOf(0.02f))).setScale(2, RoundingMode.HALF_UP);
+        } else{
+
+            return this.price.add(ivaPrice).setScale(2, RoundingMode.HALF_UP);
+        }
+        
+
+
+    }
 }
